@@ -1,0 +1,11 @@
+﻿Дата: 2026-11-07 11:58:45
+Образ, который будет запущен: localhost:5001/campus-api@sha256:bd0fb07602e37ae697813b5b5bded72cfc73db5485347e622186339599f26c8b
+Commit: 591dda2cb2de635d22298b8e6345ecc03ce1fffc
+Сигнал отката: новые Pod не становятся Ready, rollout превышает progressDeadlineSeconds (80с), либо HTTP через Ingress перестаёт отвечать два интервала подряд.
+Код kubectl diff (1 означает, что есть изменения): 2
+kubectl : error: failed to run "diff": executable file not found in %PATH%
+At C:\Users\Main_admin\IThub\Облачные технологии\kt2-k8s\ci\release.ps1:205 char:26
++ $diff = Invoke-Capture { kubectl diff -k k8s/overlays/dev }
++                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (error: failed t...found in %PATH%:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError

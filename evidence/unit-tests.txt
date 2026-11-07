@@ -1,0 +1,15 @@
+﻿Дата: 2026-11-07 11:58:06
+Команда: docker run --rm -v app:/src -w /src python:3.13-slim python -m unittest test_app.py
+Ожидание: OK
+Код: 0
+docker : ....
+At C:\Users\Main_admin\IThub\Облачные технологии\kt2-k8s\ci\release.ps1:53 char:27
++ ... e-Capture { docker run --rm -v "${root}/app:/src" -w /src python:3.13 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (....:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

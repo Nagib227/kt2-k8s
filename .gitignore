@@ -1,0 +1,8 @@
+*.local.yaml
+.kube/
+*.key
+*.crt
+*.pem
+evidence/*.tmp
+__pycache__/
+.pytest_cache/

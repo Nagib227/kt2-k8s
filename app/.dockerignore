@@ -1,0 +1,10 @@
+.git
+**/.env
+**/*.pem
+**/*.key
+**/*.crt
+**/__pycache__
+**/.vscode
+**/.idea
+test_app.py
+**/*_test.py

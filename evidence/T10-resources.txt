@@ -1,0 +1,77 @@
+﻿Дата: 2026-11-07 12:00:04
+Namespace: campus-dev
+Команда: kubectl scale deployment/campus-api --replicas=3, затем возврат к 2 и kubectl get hpa
+Ожидание: requests/limits видны, ручной scale меняет replicas, HPA существует
+После scale 3:
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+campus-api   3/3     3            3           3m44s
+HPA:
+NAME         REFERENCE               TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+campus-api   Deployment/campus-api   cpu: 2%/70%   2         4         2          20s
+top:
+NAME                               CPU(cores)   MEMORY(bytes)   
+campus-api-77d5967949-kw9xm        1m           13Mi            
+campus-api-77d5967949-wpgjf        1m           13Mi            
+campus-frontend-567db7d565-tmf7d   1m           9Mi             
+campus-frontend-567db7d565-v29w8   1m           9Mi
+describe (фрагмент resources ищется в полном выводе):
+Name:                   campus-api
+Namespace:              campus-dev
+CreationTimestamp:      Sat, 07 Nov 2026 11:55:59 +0300
+Labels:                 app=campus-api
+                        app.kubernetes.io/component=api
+                        app.kubernetes.io/name=campus-api
+                        app.kubernetes.io/part-of=campusboard
+                        environment=dev
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=campus-api
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  0 max unavailable, 1 max surge
+Pod Template:
+  Labels:           app=campus-api
+                    app.kubernetes.io/component=api
+                    app.kubernetes.io/name=campus-api
+                    app.kubernetes.io/part-of=campusboard
+  Service Account:  campus-api
+  Containers:
+   api:
+    Image:      localhost:5001/campus-api@sha256:bd0fb07602e37ae697813b5b5bded72cfc73db5485347e622186339599f26c8b
+    Port:       8080/TCP (http)
+    Host Port:  0/TCP (http)
+    Limits:
+      cpu:     200m
+      memory:  128Mi
+    Requests:
+      cpu:      50m
+      memory:   64Mi
+    Liveness:   http-get http://:http/live delay=0s timeout=1s period=10s #success=1 #failure=3
+    Readiness:  http-get http://:http/ready delay=0s timeout=1s period=3s #success=1 #failure=2
+    Startup:    http-get http://:http/live delay=0s timeout=1s period=2s #success=1 #failure=15
+    Environment:
+      MESSAGE:    <set to the key 'MESSAGE' of config map 'campus-config'>    Optional: false
+      LOG_LEVEL:  <set to the key 'LOG_LEVEL' of config map 'campus-config'>  Optional: false
+      API_TOKEN:  <set to the key 'API_TOKEN' in secret 'campus-api-secret'>  Optional: false
+    Mounts:
+      /tmp from tmp (rw)
+  Volumes:
+   tmp:
+    Type:          EmptyDir (a temporary directory that shares a pod's lifetime)
+    Medium:        
+    SizeLimit:     <unset>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   campus-api-77d5967949 (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  4m5s  deployment-controller  Scaled up replica set campus-api-77d5967949 from 0 to 2
+  Normal  ScalingReplicaSet  24s   deployment-controller  Scaled up replica set campus-api-77d5967949 from 2 to 3
+  Normal  ScalingReplicaSet  21s   deployment-controller  Scaled down replica set campus-api-77d5967949 from 3 to 2

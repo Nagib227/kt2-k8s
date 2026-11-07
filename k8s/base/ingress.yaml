@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: campus
+  labels:
+    app.kubernetes.io/name: campus
+    app.kubernetes.io/part-of: campusboard
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - campus.local
+      secretName: campus-tls
+  rules:
+    - host: campus.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: campus-api
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: campus-frontend
+                port:
+                  number: 80

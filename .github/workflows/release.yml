@@ -1,0 +1,31 @@
+name: release-gates
+on:
+  push:
+  pull_request:
+jobs:
+  gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: kubectl
+        run: |
+          curl -fsSL -o kubectl "https://dl.k8s.io/release/v1.34.1/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+      - name: unit tests
+        run: docker run --rm -v "$PWD/app:/src" -w /src python:3.13-slim python -m unittest test_app.py
+      - name: build image without publishing latest
+        run: |
+          docker build --provenance=false --sbom=false \
+            -t "campus-api:${GITHUB_SHA}" \
+            --build-arg APP_VERSION=1.0.0 \
+            --build-arg READY_DEFAULT=true \
+            --build-arg REVISION="${GITHUB_SHA}" \
+            ./app
+      - name: render overlays
+        run: |
+          kubectl kustomize k8s/overlays/dev > /tmp/dev.yaml
+          kubectl kustomize k8s/overlays/stage > /tmp/stage.yaml
+          grep -n "environment: dev" /tmp/dev.yaml
+          grep -n "environment: stage" /tmp/stage.yaml
+          grep -n "replicas: 2" /tmp/dev.yaml

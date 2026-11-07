@@ -1,0 +1,27 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: campus-api
+  labels:
+    app: campus-api
+    app.kubernetes.io/name: campus-api
+    app.kubernetes.io/part-of: campusboard
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: campus-api
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: campus-frontend
+  labels:
+    app: campus-frontend
+    app.kubernetes.io/name: campus-frontend
+    app.kubernetes.io/part-of: campusboard
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: campus-frontend

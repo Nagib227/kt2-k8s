@@ -1,0 +1,18 @@
+﻿Дата: 2026-11-07 11:59:39
+Namespace: campus-dev
+Положительный путь: Pod в namespace ingress-nginx ходит на ClusterIP 10.96.142.11. Фаза Succeeded, код 0.
+Connecting to 10.96.142.11 (10.96.142.11:80)
+  HTTP/1.1 200 OK
+  Server: BaseHTTP/0.6 Python/3.13.18
+  Date: Sat, 07 Nov 2026 08:59:31 GMT
+  Content-Type: application/json; charset=utf-8
+  Content-Length: 360
+  
+writing to stdout
+-                    100% |********************************|   360  0:00:00 ETA
+written to stdout
+{"version": "1.0.0", "message": "Объявления кампуса (dev)", "database": "not-configured", "token_set": true, "items": [{"id": 1, "title": "Пары", "text": "Облачные технологии: практика по Kubernetes"}, {"id": 2, "title": "Библиотека", "text": "Читальный зал работает до 21:00"}]}
+Отрицательный путь: Pod в campus-dev ходит на тот же ClusterIP. Фаза Failed, код 1.
+Connecting to 10.96.142.11 (10.96.142.11:80)
+wget: download timed out
+Ожидание: разрешённый путь отвечает JSON, запрещённый завершается по таймауту.

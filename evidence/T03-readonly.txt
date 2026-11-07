@@ -1,0 +1,18 @@
+﻿Дата: 2026-11-07 11:59:19
+Namespace: campus-dev
+Команда: запись в /etc должна быть запрещена, запись в /tmp разрешена
+Код записи в /etc: 1
+kubectl : Traceback (most recent call last):
+At C:\Users\Main_admin\IThub\Облачные технологии\kt2-k8s\ci\release.ps1:259 char:28
++ ... e-Capture { kubectl -n campus-dev exec deploy/campus-api -- python -c ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "<string>", line 1, in <module>
+    open('/etc/denied','w').write('x')
+    ~~~~^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 30] Read-only file system: '/etc/denied'
+command terminated with exit code 1
+Код записи в /tmp: 0
+tmp-write-ok

@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: campus-api
+  labels:
+    app: campus-api
+    app.kubernetes.io/name: campus-api
+    app.kubernetes.io/component: api
+    app.kubernetes.io/part-of: campusboard
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 80
+  selector:
+    matchLabels:
+      app: campus-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: campus-api
+        app.kubernetes.io/name: campus-api
+        app.kubernetes.io/component: api
+        app.kubernetes.io/part-of: campusboard
+    spec:
+      serviceAccountName: campus-api
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 15
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: api
+          image: campus-api:local
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: campus-config
+                  key: MESSAGE
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: campus-config
+                  key: LOG_LEVEL
+            - name: API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: campus-api-secret
+                  key: API_TOKEN
+          startupProbe:
+            httpGet:
+              path: /live
+              port: http
+            periodSeconds: 2
+            failureThreshold: 15
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            periodSeconds: 3
+            failureThreshold: 2
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: http
+            periodSeconds: 10
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+          lifecycle:
+            preStop:
+              exec:
+                command: ["python", "-c", "import time; time.sleep(5)"]
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

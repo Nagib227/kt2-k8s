@@ -1,0 +1,19 @@
+﻿apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-from-kind-node
+  labels:
+    app.kubernetes.io/part-of: campusboard
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: fc00:f853:ccd:e793::/64
+        - ipBlock:
+            cidr: 172.19.0.2/32
+      ports:
+        - protocol: TCP
+          port: 8080

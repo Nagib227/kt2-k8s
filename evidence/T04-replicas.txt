@@ -1,0 +1,13 @@
+﻿Дата: 2026-11-07 11:59:19
+Namespace: campus-dev
+Команда: kubectl -n campus-dev get deploy,pod
+Ожидание: READY 2/2 и AVAILABLE 2 у campus-api и campus-frontend
+NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/campus-api        2/2     2            2           3m20s
+deployment.apps/campus-frontend   2/2     2            2           3m20s
+
+NAME                                   READY   STATUS    RESTARTS   AGE
+pod/campus-api-77d5967949-bmzqs        1/1     Running   0          2m11s
+pod/campus-api-77d5967949-kw9xm        1/1     Running   0          2m11s
+pod/campus-frontend-567db7d565-tmf7d   1/1     Running   0          3m20s
+pod/campus-frontend-567db7d565-v29w8   1/1     Running   0          3m20s

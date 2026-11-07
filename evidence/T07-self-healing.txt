@@ -1,0 +1,13 @@
+﻿Дата: 2026-11-07 11:59:19
+Namespace: campus-dev
+Команда: kubectl -n campus-dev delete pod campus-api-77d5967949-bmzqs
+Ожидание: Deployment возвращает два Ready Pod; в логе удалённого Pod виден SIGTERM
+kubectl : error: error from server (NotFound): pods "campus-api-77d5967949-bmzqs" not found in namespace "campus-dev"
+At C:\Users\Main_admin\IThub\Облачные технологии\kt2-k8s\ci\release.ps1:314 char:29
++ $sigterm = Invoke-Capture { kubectl -n campus-dev logs $victim }
++                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (error: error fr...ce "campus-dev":String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+NAME                          READY   STATUS    RESTARTS   AGE
+campus-api-77d5967949-kw9xm   1/1     Running   0          2m15s
+campus-api-77d5967949-wpgjf   1/1     Running   0          3s

@@ -1,0 +1,6 @@
+﻿Дата: 2026-11-07 12:01:58
+Команда: kubectl auth can-i от system:serviceaccount:campus-dev:campus-api
+Ожидание: no, токен ServiceAccount не монтируется
+no
+no
+no

@@ -1,0 +1,24 @@
+﻿IMAGE          CREATED          CREATED BY                                      SIZE      COMMENT
+bd0fb07602e3   10 minutes ago   ENTRYPOINT ["python" "/app/app.py"]             0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago   EXPOSE [8080/tcp]                               0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago   USER 10001                                      0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago   ENV APP_VERSION=1.0.0 READY=true PYTHONDONTW…   0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago   COPY --chown=10001:10001 /src/app.py /app/ap…   12.3kB    buildkit.dockerfile.v0
+<missing>      10 minutes ago   RUN |3 APP_VERSION=1.0.0 READY_DEFAULT=true …   8.19kB    buildkit.dockerfile.v0
+<missing>      10 minutes ago   COPY /wheels /tmp/wheels # buildkit             12.3kB    buildkit.dockerfile.v0
+<missing>      10 minutes ago   WORKDIR /app                                    8.19kB    buildkit.dockerfile.v0
+<missing>      10 minutes ago   RUN |3 APP_VERSION=1.0.0 READY_DEFAULT=true …   41kB      buildkit.dockerfile.v0
+<missing>      10 minutes ago   LABEL org.opencontainers.image.title=campus-…   0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago   ARG REVISION=591dda2cb2de635d22298b8e6345ecc…   0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago   ARG READY_DEFAULT=true                          0B        buildkit.dockerfile.v0
+<missing>      10 minutes ago   ARG APP_VERSION=1.0.0                           0B        buildkit.dockerfile.v0
+<missing>      2 days ago       CMD ["python3"]                                 0B        buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;  for src in idle3 p…   16.4kB    buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;   savedAptMark="$(a…   40.5MB    buildkit.dockerfile.v0
+<missing>      2 days ago       ENV PYTHON_SHA256=abb0102e6d4ae027509bcb8232…   0B        buildkit.dockerfile.v0
+<missing>      2 days ago       ENV PYTHON_VERSION=3.13.18                      0B        buildkit.dockerfile.v0
+<missing>      2 days ago       ENV GPG_KEY=7169605F62C751356D054A26A821E680…   0B        buildkit.dockerfile.v0
+<missing>      2 days ago       RUN /bin/sh -c set -eux;  apt-get update;  a…   4.93MB    buildkit.dockerfile.v0
+<missing>      2 days ago       ENV LANG=C.UTF-8                                0B        buildkit.dockerfile.v0
+<missing>      2 days ago       ENV PATH=/usr/local/bin:/usr/local/sbin:/usr…   0B        buildkit.dockerfile.v0
+<missing>      2 days ago       # debian.sh --arch 'amd64' out/ 'trixie' '@1…   87.7MB    debuerreotype 0.17

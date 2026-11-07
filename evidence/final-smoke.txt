@@ -1,0 +1,3 @@
+﻿Дата: 2026-11-07 12:01:58
+После испытаний Deployment campus-dev возвращён на digest релиза sha256:bd0fb07602e37ae697813b5b5bded72cfc73db5485347e622186339599f26c8b
+{"version": "1.0.0", "message": "Объявления кампуса (dev)", "database": "not-configured", "token_set": true, "items": [{"id": 1, "title": "Пары", "text": "Облачные технологии: практика по Kubernetes"}, {"id": 2, "title": "Библиотека", "text": "Читальный зал работает до 21:00"}]}

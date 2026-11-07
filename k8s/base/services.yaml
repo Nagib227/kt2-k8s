@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: campus-api
+  labels:
+    app: campus-api
+    app.kubernetes.io/name: campus-api
+    app.kubernetes.io/part-of: campusboard
+spec:
+  type: ClusterIP
+  selector:
+    app: campus-api
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: campus-frontend
+  labels:
+    app: campus-frontend
+    app.kubernetes.io/name: campus-frontend
+    app.kubernetes.io/part-of: campusboard
+spec:
+  type: ClusterIP
+  selector:
+    app: campus-frontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

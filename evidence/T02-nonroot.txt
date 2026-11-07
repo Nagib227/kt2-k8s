@@ -1,0 +1,6 @@
+﻿Дата: 2026-11-07 11:59:18
+Namespace: campus-dev
+Команда: kubectl -n campus-dev exec deploy/campus-api -- id
+Ожидание: uid не 0
+Код: 0
+uid=10001(app) gid=10001(app) groups=10001(app)

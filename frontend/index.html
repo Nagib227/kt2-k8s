@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>CampusBoard</title>
+</head>
+<body style="background:#ffffff;color:#111111;font-family:sans-serif">
+  <h1>CampusBoard</h1>
+  <p id="msg">Загрузка объявлений...</p>
+  <ul id="list"></ul>
+  <script>
+    fetch("/api/announcements")
+      .then(function (response) { return response.json(); })
+      .then(function (data) {
+        document.getElementById("msg").textContent =
+          data.message + " (API " + data.version + ")";
+        var list = document.getElementById("list");
+        data.items.forEach(function (item) {
+          var li = document.createElement("li");
+          li.textContent = item.title + ": " + item.text;
+          list.appendChild(li);
+        });
+      })
+      .catch(function () {
+        document.getElementById("msg").textContent = "API недоступен";
+      });
+  </script>
+</body>
+</html>

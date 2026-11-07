@@ -1,0 +1,38 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: campus-stage
+resources:
+  - ../../base
+  - namespace.yaml
+patches:
+  - target:
+      kind: Ingress
+      name: campus
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: campus-stage.local
+      - op: replace
+        path: /spec/tls/0/hosts/0
+        value: campus-stage.local
+  - target:
+      kind: ConfigMap
+      name: campus-config
+    patch: |-
+      - op: replace
+        path: /data/MESSAGE
+        value: "Объявления кампуса (stage)"
+      - op: replace
+        path: /data/LOG_LEVEL
+        value: debug
+images:
+  - name: campus-api
+    newName: localhost:5001/campus-api
+    digest: sha256:bd0fb07602e37ae697813b5b5bded72cfc73db5485347e622186339599f26c8b
+  - name: nginxinc/nginx-unprivileged
+    newName: nginxinc/nginx-unprivileged
+    digest: sha256:65e3e85dbaed8ba248841d9d58a899b6197106c23cb0ff1a132b7bfe0547e4c0
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: campusboard
+      environment: stage

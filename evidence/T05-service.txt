@@ -1,0 +1,9 @@
+﻿Дата: 2026-11-07 11:59:19
+Namespace: campus-dev
+Команда: kubectl -n campus-dev get endpointslice ; curl ClusterIP 10.96.142.11 из пода ingress-nginx
+Ожидание: EndpointSlice Ready, ClusterIP отвечает
+NAME                    ADDRESSTYPE   PORTS   ENDPOINTS                       AGE
+campus-api-xv4jz        IPv4          8080    192.168.172.18,192.168.172.19   3m20s
+campus-frontend-hxn9l   IPv4          8080    192.168.172.12,192.168.172.13   3m20s
+Код curl: 0
+{"version": "1.0.0", "message": "Объявления кампуса (dev)", "database": "not-configured", "token_set": true, "items": [{"id": 1, "title": "Пары", "text": "Облачные технологии: практика по Kubernetes"}, {"id": 2, "title": "Библиотека", "text": "Читальный зал работает до 21:00"}]}

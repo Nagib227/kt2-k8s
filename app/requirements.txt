@@ -1,0 +1,3 @@
+# CampusBoard API uses the Python standard library only.
+# The build stage still compiles wheels from this file, so a pinned
+# dependency can be added later without changing the Dockerfile.

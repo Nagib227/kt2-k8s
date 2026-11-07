@@ -1,0 +1,11 @@
+﻿Дата: 2026-11-07 12:01:58
+Один узел kind. Pod нельзя разложить по разным машинам, отказа узла стенд не переживёт.
+PDB minAvailable=1 ограничивает добровольный drain, но не падение единственного узла и не заменяет maxUnavailable.
+NAME                   STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION                              CONTAINER-RUNTIME
+campus-control-plane   Ready    control-plane   18m   v1.37.0   172.19.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.18.54.1-microsoft-standard-WSL2 (amd64)   containerd://2.3.4
+NAME                               READY   STATUS      RESTARTS   AGE     IP               NODE                   NOMINATED NODE   READINESS GATES
+campus-api-655f65cdf5-mpw4k        0/1     Completed   0          113s    192.168.172.26   campus-control-plane   <none>           <none>
+campus-api-77d5967949-lgb2c        1/1     Running     0          4s      192.168.172.30   campus-control-plane   <none>           <none>
+campus-api-77d5967949-r55wl        1/1     Running     0          7s      192.168.172.29   campus-control-plane   <none>           <none>
+campus-frontend-567db7d565-tmf7d   1/1     Running     0          5m59s   192.168.172.13   campus-control-plane   <none>           <none>
+campus-frontend-567db7d565-v29w8   1/1     Running     0          5m59s   192.168.172.12   campus-control-plane   <none>           <none>

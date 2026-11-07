@@ -1,0 +1,56 @@
+﻿Дата: 2026-11-07 12:03:30
+Namespace: campus-dev
+Команда: curl -kv https://campus-dev.local:8443/api/announcements ; kubectl -n campus-dev get svc
+Ожидание: TLS отвечает JSON API, Service остаётся ClusterIP
+Вывод: тест пройден
+curl.exe : * Added campus-dev.local:8443:127.0.0.1 to DNS cache
+строка:5 знак:8
++ $tls = curl.exe -kv --max-time 20 --resolve campus-dev.local:8443:127 ...
++        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (* Added campus-....1 to DNS cache:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+* Hostname campus-dev.local was found in DNS cache
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 127.0.0.1:8443...
+* schannel: disabled automatic use of client certificate
+* ALPN: curl offers http/1.1
+* ALPN: server accepted http/1.1
+* Connected to campus-dev.local (127.0.0.1) port 8443
+* using HTTP/1.x
+> GET /api/announcements HTTP/1.1
+
+> Host: campus-dev.local:8443
+
+> User-Agent: curl/8.13.0
+
+> Accept: */*
+
+> 
+
+* Request completely sent off
+< HTTP/1.1 200 OK
+
+< Date: Sat, 07 Nov 2026 09:03:30 GMT
+
+< Content-Type: application/json; charset=utf-8
+
+< Content-Length: 360
+
+< Connection: keep-alive
+
+< Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+< 
+
+{ [360 bytes data]
+
+100   360  100   360    0     0  38618      0 --:--:-- --:--:-- --:--:-- 40000
+* Connection #0 to host campus-dev.local left intact
+{"version": "1.0.0", "message": "Объявления кампуса (dev)", "database": "not-configured", "token_set": true, "items": [{"id": 1, "title": "Пары", "text": "Облачные технологии: практика по Kubernetes"}, {"id": 2, "title": "Библиотека", "text": "Читальный зал работает до 21:00"}]}
+
+NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE     SELECTOR
+campus-api        ClusterIP   10.96.142.11   <none>        80/TCP    7m31s   app=campus-api
+campus-frontend   ClusterIP   10.96.64.168   <none>        80/TCP    7m31s   app=campus-frontend

@@ -1,0 +1,5 @@
+﻿Дата: 2026-11-07 11:58:05
+Команда: git rev-parse HEAD
+Ожидание: полный SHA коммита, которым помечен образ
+Факт: 591dda2cb2de635d22298b8e6345ecc03ce1fffc
+Вывод: тег образа будет localhost:5001/campus-api:591dda2cb2de635d22298b8e6345ecc03ce1fffc

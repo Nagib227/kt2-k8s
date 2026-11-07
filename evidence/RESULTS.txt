@@ -1,0 +1,12 @@
+﻿T01	PASS	sha256:bd0fb07602e37ae697813b5b5bded72cfc73db5485347e622186339599f26c8b
+T02	PASS	uid=10001
+T03	PASS	root fs read-only, /tmp writable
+T04	PASS	2/2
+T05	PASS	10.96.142.11
+T06	PASS	tls campus-dev.local:8443
+T07	PASS	replicas restored
+T11	PASS	allow and deny
+T10	PASS	scale 3 and hpa present
+T08	PASS	no failed curls
+T09	PASS	rollback to 2.0.0
+T12	PASS	no secret in git, no database service
